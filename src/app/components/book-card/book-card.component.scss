@@ -1,20 +1,63 @@
 .book-card {
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 20px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
-button {
+.book-card img {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.book-card h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #080929;
+  margin: 10px 0;
+  line-height: 1.4em;
+  max-height: 2.8em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.book-card p {
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+
+.book-card .book-category {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.book-card button {
   background-color: #7065f0;
   color: #fff;
   border: none;
   padding: 10px 15px;
   border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
-}
+  font-family: "Plus Jakarta Sans", sans-serif;
 
-button:hover {
-  background-color: #5b4dcf;
+  &:hover {
+    background-color: #5847c7;
+  }
 }
