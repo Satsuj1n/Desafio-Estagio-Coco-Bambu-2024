@@ -1,7 +1,7 @@
 <div class="book-card">
-  <img [src]="book.volumeInfo.imageLinks?.thumbnail" alt="Capa do livro" />
+  <img [src]="book.volumeInfo.imageLinks.thumbnail" alt="Capa do livro" />
   <h2>{{ book.volumeInfo.title }}</h2>
-  <p>{{ book.volumeInfo.authors?.join(", ") }}</p>
+  <p>{{ book.volumeInfo.authors.join(", ") }}</p>
   <p>{{ book.volumeInfo.description }}</p>
   <button (click)="addToFavorites()">Adicionar aos Favoritos</button>
 </div>

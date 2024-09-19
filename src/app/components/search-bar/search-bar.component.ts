@@ -10,9 +10,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class SearchBarComponent {
   query: string = '';
-  @Output() search = new EventEmitter<string>();
+  @Output() search = new EventEmitter<string>(); // O tipo é string
 
   onSearch() {
-    this.search.emit(this.query);
+    this.search.emit(this.query); // Emitindo a string digitada
   }
 }
