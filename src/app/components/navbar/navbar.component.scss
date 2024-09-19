@@ -1,0 +1,27 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #7065f0;
+  color: white;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.favorites-button {
+  background-color: #fff;
+  color: #7065f0;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.favorites-button:hover {
+  background-color: #5b4dcf;
+  color: white;
+}
