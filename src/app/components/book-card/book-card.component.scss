@@ -20,6 +20,7 @@
 .book-card h2 {
   font-size: 1rem;
   font-weight: 600;
+  white-space: nowrap;
   color: #080929;
   margin: 10px 0;
   line-height: 1.4em;
@@ -27,6 +28,16 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: "Plus Jakarta Sans", sans-serif;
+  min-height: 48px;  
+}
+
+.book-card .book-author {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  min-height: 24px;
 }
 
 .book-card p {
@@ -34,10 +45,8 @@
   color: #6b7280;
   line-height: 1.4;
   overflow: hidden;
-  text-overflow: ellipsis;
   font-family: "Plus Jakarta Sans", sans-serif;
 }
-
 
 .book-card .book-category {
   font-size: 0.875rem;
@@ -56,6 +65,7 @@
   font-size: 1rem;
   cursor: pointer;
   font-family: "Plus Jakarta Sans", sans-serif;
+  margin-top: auto;
 
   &:hover {
     background-color: #5847c7;
