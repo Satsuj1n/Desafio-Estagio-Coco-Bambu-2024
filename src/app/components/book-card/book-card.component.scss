@@ -20,7 +20,6 @@
 .book-card h2 {
   font-size: 1rem;
   font-weight: 600;
-  white-space: nowrap;
   color: #080929;
   margin: 10px 0;
   line-height: 1.4em;
@@ -28,32 +27,27 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: "Plus Jakarta Sans", sans-serif;
-  min-height: 48px;  
-}
-
-.book-card .book-author {
-  font-size: 0.875rem;
-  color: #6b7280;
-  font-weight: bold;
-  margin-bottom: 10px;
-  font-family: "Plus Jakarta Sans", sans-serif;
-  min-height: 24px;
 }
 
 .book-card p {
   font-size: 0.875rem;
   color: #6b7280;
   line-height: 1.4;
+  margin-bottom: 10px;
   overflow: hidden;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  text-overflow: ellipsis;
+  max-height: 4.2em; /* Limita a descrição para 3 linhas */
 }
 
-.book-card .book-category {
-  font-size: 0.875rem;
-  color: #6b7280;
-  font-weight: bold;
+.book-card .description {
+  flex-grow: 1; /* Faz a descrição ocupar o espaço restante */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.book-card p-rating {
   margin-bottom: 10px;
-  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 .book-card button {
@@ -64,10 +58,10 @@
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
-  font-family: "Plus Jakarta Sans", sans-serif;
-  margin-top: auto;
 
   &:hover {
     background-color: #5847c7;
   }
 }
+
+

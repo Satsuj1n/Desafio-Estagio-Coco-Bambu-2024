@@ -3,5 +3,6 @@
   <h2>{{ book.volumeInfo.title }}</h2>
   <p>{{ book.volumeInfo.authors.join(', ') }}</p>
   <p>{{ book.volumeInfo.description.length > 200 ? book.volumeInfo.description.substring(0, 200) + '...' : book.volumeInfo.description }}</p>
+  <p-rating [(ngModel)]="value" />
   <button (click)="addToFavorites()">Adicionar aos Favoritos</button>
 </div>
