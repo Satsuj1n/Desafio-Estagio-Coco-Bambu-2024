@@ -3,16 +3,20 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Book } from '../models/book.model';
+import { BookValidationService } from './book-validation.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookService {
-  private apiUrl = 'https://www.googleapis.com/books/v1/volumes'; // URL base para a API de volumes
+  private apiUrl = 'https://www.googleapis.com/books/v1/volumes';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private validationService: BookValidationService
+  ) {}
 
-  // Função para buscar livros com base na query ou buscar os mais recentes com paginação
+
   searchBooks(
     query: string = '',
     startIndex: number = 0
@@ -37,15 +41,19 @@ export class BookService {
         map((response) => {
           // Mapeia os livros e total de itens
           const books = response.items
-            ? response.items.map((item) => ({
-                id: item.id,
-                volumeInfo: {
-                  title: item.volumeInfo.title,
-                  authors: item.volumeInfo.authors,
-                  description: item.volumeInfo.description,
-                  imageLinks: item.volumeInfo.imageLinks,
-                },
-              }))
+            ? response.items
+                .map((item) => ({
+                  id: item.id,
+                  volumeInfo: {
+                    title: item.volumeInfo.title,
+                    authors: item.volumeInfo.authors,
+                    description: item.volumeInfo.description,
+                    imageLinks: item.volumeInfo.imageLinks,
+                  },
+                }))
+                .filter((book: Book) =>
+                  this.validationService.hasRequiredInfo(book)
+                ) 
             : [];
 
           return { books, totalItems: response.totalItems || 0 };
