@@ -5,3 +5,37 @@
   padding: 20px;
   grid-row-gap: 60px;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  button {
+    margin-top: 50px;
+    padding: 10px 20px;
+    background-color: #7065f0;
+    color: white;
+    border: none;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+
+    &:hover {
+      background-color: #9087f0;
+    }
+
+    &.active {
+      background-color: #4f46af;
+      color: white;
+    }
+
+    &:disabled {
+      background-color: #e8e5eb;
+      cursor: not-allowed;
+    }
+  }
+}

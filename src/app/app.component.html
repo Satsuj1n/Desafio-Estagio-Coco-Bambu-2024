@@ -4,3 +4,18 @@
 <div *ngIf="books.length > 0" class="book-list">
   <app-book-card *ngFor="let book of books" [book]="book"></app-book-card>
 </div>
+
+<div class="pagination" *ngIf="totalItems > booksPerPage">
+  <button (click)="prevPage()" [disabled]="currentPage === 1">←</button>
+
+  <button
+    *ngFor="let page of visiblePages"
+    (click)="paginate(page)"
+    [class.active]="currentPage === page"
+  >
+    {{ page }}
+  </button>
+
+  <button (click)="nextPage()" [disabled]="currentPage === Math.ceil(totalItems / booksPerPage)">→</button>
+</div>
+
