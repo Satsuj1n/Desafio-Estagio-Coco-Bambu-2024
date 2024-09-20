@@ -41,6 +41,11 @@
   cursor: pointer;
 
   &:hover {
-    text-decoration:underline;
+    text-decoration: underline;
   }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
