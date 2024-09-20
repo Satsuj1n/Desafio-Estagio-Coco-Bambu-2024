@@ -1,4 +1,9 @@
 <div class="search-bar">
-  <input type="text" [(ngModel)]="query" (input)="onInputChange()" />
+  <input
+    type="text"
+    [(ngModel)]="query"
+    (input)="onInputChange()"
+    placeholder="Busque por título ou autor"
+  />
   <button (click)="onSearch()">Buscar</button>
 </div>

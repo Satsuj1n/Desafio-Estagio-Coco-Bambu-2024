@@ -11,7 +11,7 @@ import {
   Subscription,
   debounceTime,
   distinctUntilChanged,
-} from 'rxjs';
+} from 'rxjs'; // 4 operadores RxJS
 
 @Component({
   selector: 'app-search-bar',
