@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Book } from '../../models/book.model';
+import { BookService } from '../../services/book.service';
 
 @Component({
   selector: 'app-book-card-simple',
@@ -11,9 +12,10 @@ export class BookCardSimpleComponent {
   @Input() book!: Book;
   @Output() favoriteAdded = new EventEmitter<void>();
 
+  constructor(private bookService: BookService) {}
+
   addToFavorites() {
-    console.log(`Livro adicionado aos favoritos: ${this.book.volumeInfo.title}`);
-    // Emitir evento para incrementar o contador de favoritos
+    this.bookService.addToFavorites(this.book);
     this.favoriteAdded.emit();
   }
 }

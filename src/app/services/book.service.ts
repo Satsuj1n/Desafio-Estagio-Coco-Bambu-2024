@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Book } from '../models/book.model';
 import { BookValidationService } from './book-validation.service';
@@ -9,14 +9,16 @@ import { BookValidationService } from './book-validation.service';
   providedIn: 'root',
 })
 export class BookService {
-  private apiUrl = 'https://www.googleapis.com/books/v1/volumes';
+  private apiUrl = 'https://www.googleapis.com/books/v1/volumes'; // URL base para a API de volumes
+  private favoritesKey = 'favorites';
+  favoriteCountChanged = new Subject<void>();
 
   constructor(
     private http: HttpClient,
     private validationService: BookValidationService
   ) {}
 
-
+  // Função para buscar livros com base na query ou buscar os mais recentes com paginação
   searchBooks(
     query: string = '',
     startIndex: number = 0
@@ -53,7 +55,7 @@ export class BookService {
                 }))
                 .filter((book: Book) =>
                   this.validationService.hasRequiredInfo(book)
-                ) 
+                )
             : [];
 
           return { books, totalItems: response.totalItems || 0 };
@@ -65,5 +67,30 @@ export class BookService {
           );
         })
       );
+  }
+
+  // Funções de favoritos
+  getFavoriteBooks(): Book[] {
+    return JSON.parse(localStorage.getItem('favorites') || '[]');
+  }
+
+  addToFavorites(book: Book) {
+    let favorites = this.getFavoriteBooks();
+    if (!favorites.find((fav) => fav.id === book.id)) {
+      favorites.push(book);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      this.favoriteCountChanged.next(); // Emite o evento
+    }
+  }
+
+  isFavorite(book: Book): boolean {
+    return this.getFavoriteBooks().some((fav) => fav.id === book.id);
+  }
+
+  removeFavorite(book: Book) {
+    const favorites = this.getFavoriteBooks().filter(
+      (b: Book) => b.id !== book.id
+    );
+    localStorage.setItem(this.favoritesKey, JSON.stringify(favorites));
   }
 }

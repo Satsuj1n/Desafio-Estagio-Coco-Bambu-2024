@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router'; // Para navegação
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router'; // Para navegação
 import { NavBarComponent } from './components/navbar/navbar.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { BookCardComponent } from './components/book-card/book-card.component';
@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common'; // Para diretivas como *ngFor e 
 import { Book } from './models/book.model';
 import { BookService } from './services/book.service';
 import { BookCardSimpleComponent } from './components/book-card-simple/book-card-simple.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,7 @@ import { BookCardSimpleComponent } from './components/book-card-simple/book-card
     NavBarComponent,
     SearchBarComponent,
     BookCardComponent,
-    BookCardSimpleComponent
+    BookCardSimpleComponent,
   ], // Importe os componentes standalone
 })
 export class AppComponent implements OnInit {
@@ -30,19 +31,47 @@ export class AppComponent implements OnInit {
   searchQuery: string = '';
   visiblePages: number[] = [];
   maxVisiblePages: number = 3; // Número máximo de páginas visíveis
-  favoriteCount = 0;
+  favoriteCount: number = 0;
+  isHomeRoute: boolean = false;
 
   Math = Math; // Expondo o objeto Math para o template
 
-  constructor(private bookService: BookService) {}
+  private routerSubscription!: Subscription;
 
-  onFavoriteAdded() {
-    this.favoriteCount++;
-  }
+  constructor(private bookService: BookService, private router: Router) {}
 
   ngOnInit() {
+    this.updateFavoriteCount();
     this.loadBooks();
-    this.updateVisiblePages();
+
+    this.routerSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isHomeRoute = this.router.url === '/';
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
+  }
+
+  onFavoriteAdded() {
+    this.updateFavoriteCount();
+    this.bookService.getFavoriteBooks(); // Atualiza a lista de favoritos
+  }
+
+  updateFavoriteCount() {
+    if (typeof window !== 'undefined') {
+      // Verifica se o window está disponível
+      const favoriteBooks = JSON.parse(
+        localStorage.getItem('favorites') || '[]'
+      );
+      this.favoriteCount = favoriteBooks.length;
+    } else {
+      this.favoriteCount = 0; // Caso window ou localStorage não estejam disponíveis
+    }
   }
 
   loadBooks() {

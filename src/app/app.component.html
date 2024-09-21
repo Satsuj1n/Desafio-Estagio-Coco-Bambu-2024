@@ -1,29 +1,34 @@
 <app-navbar [favoriteCount]="favoriteCount"></app-navbar>
-<app-search-bar (search)="onSearch($event)"></app-search-bar>
 
-<div *ngIf="books.length > 0" class="book-list">
-  <app-book-card-simple
-    *ngFor="let book of books"
-    [book]="book"
-    (favoriteAdded)="onFavoriteAdded()"
-  ></app-book-card-simple>
-</div>
+<!-- Renderiza o conteúdo específico da rota -->
+<router-outlet></router-outlet>
 
-<div class="pagination" *ngIf="totalItems > booksPerPage">
-  <button (click)="prevPage()" [disabled]="currentPage === 1">←</button>
+<!-- Exibe a barra de busca e os livros na rota inicial -->
+<div *ngIf="isHomeRoute">
+  <app-search-bar (search)="onSearch($event)"></app-search-bar>
 
-  <button
-    *ngFor="let page of visiblePages"
-    (click)="paginate(page)"
-    [class.active]="currentPage === page"
-  >
-    {{ page }}
-  </button>
+  <div *ngIf="books.length > 0" class="book-list">
+    <app-book-card-simple
+      *ngFor="let book of books"
+      [book]="book"
+      (favoriteAdded)="onFavoriteAdded()"
+    ></app-book-card-simple>
+  </div>
 
-  <button
-    (click)="nextPage()"
-    [disabled]="currentPage === Math.ceil(totalItems / booksPerPage)"
-  >
-    →
-  </button>
+  <div class="pagination" *ngIf="totalItems > booksPerPage">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">←</button>
+    <button
+      *ngFor="let page of visiblePages"
+      (click)="paginate(page)"
+      [class.active]="currentPage === page"
+    >
+      {{ page }}
+    </button>
+    <button
+      (click)="nextPage()"
+      [disabled]="currentPage === Math.ceil(totalItems / booksPerPage)"
+    >
+      →
+    </button>
+  </div>
 </div>
