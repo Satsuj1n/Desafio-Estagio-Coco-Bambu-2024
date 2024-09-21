@@ -30,10 +30,15 @@ export class AppComponent implements OnInit {
   searchQuery: string = '';
   visiblePages: number[] = [];
   maxVisiblePages: number = 3; // Número máximo de páginas visíveis
+  favoriteCount = 0;
 
   Math = Math; // Expondo o objeto Math para o template
 
   constructor(private bookService: BookService) {}
+
+  onFavoriteAdded() {
+    this.favoriteCount++;
+  }
 
   ngOnInit() {
     this.loadBooks();

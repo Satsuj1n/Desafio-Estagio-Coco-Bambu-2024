@@ -1,8 +1,12 @@
-<app-navbar></app-navbar>
+<app-navbar [favoriteCount]="favoriteCount"></app-navbar>
 <app-search-bar (search)="onSearch($event)"></app-search-bar>
 
 <div *ngIf="books.length > 0" class="book-list">
-  <app-book-card-simple *ngFor="let book of books" [book]="book"></app-book-card-simple>
+  <app-book-card-simple
+    *ngFor="let book of books"
+    [book]="book"
+    (favoriteAdded)="onFavoriteAdded()"
+  ></app-book-card-simple>
 </div>
 
 <div class="pagination" *ngIf="totalItems > booksPerPage">
@@ -16,6 +20,10 @@
     {{ page }}
   </button>
 
-  <button (click)="nextPage()" [disabled]="currentPage === Math.ceil(totalItems / booksPerPage)">→</button>
+  <button
+    (click)="nextPage()"
+    [disabled]="currentPage === Math.ceil(totalItems / booksPerPage)"
+  >
+    →
+  </button>
 </div>
-

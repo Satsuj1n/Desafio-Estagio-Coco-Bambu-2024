@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Book } from '../../models/book.model';
 
 @Component({
@@ -9,9 +9,11 @@ import { Book } from '../../models/book.model';
 })
 export class BookCardSimpleComponent {
   @Input() book!: Book;
+  @Output() favoriteAdded = new EventEmitter<void>();
 
   addToFavorites() {
-    console.log('Adicionado aos Favoritos:', this.book);
-    // Lógica para adicionar aos favoritos aqui
+    console.log(`Livro adicionado aos favoritos: ${this.book.volumeInfo.title}`);
+    // Emitir evento para incrementar o contador de favoritos
+    this.favoriteAdded.emit();
   }
 }
