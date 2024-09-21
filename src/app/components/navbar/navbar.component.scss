@@ -1,6 +1,8 @@
 .navbar {
   display: flex;
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   justify-content: space-between;
   align-items: center;
@@ -9,6 +11,7 @@
   backdrop-filter: blur(40px);
   white-space: nowrap;
   box-shadow: 0 2px 4px rgba(193, 179, 255, 0.625);
+  z-index: 1000; // Ensure the navbar is on top of other components
 }
 
 .title-container {

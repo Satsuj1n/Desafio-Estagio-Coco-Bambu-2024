@@ -12,9 +12,16 @@ import { FormsModule } from '@angular/forms';
 })
 export class BookCardComponent {
   @Input() book!: Book;
-  value: number = 0; 
+  value: number = 0;
 
   addToFavorites() {
     console.log(`Adicionado aos favoritos: ${this.book.volumeInfo.title}`);
+  }
+
+  addNote() {
+    console.log(`Nota adicionada: ${this.value}`);
+  }
+  addTag() {
+    console.log(`Tags adicionadas: ${this.value}`);
   }
 }

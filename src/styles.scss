@@ -12,6 +12,9 @@ body {
 }
 
 p-rating {
+  position: relative;
+  z-index: 0; // Lowered z-index to ensure it stays behind the navbar
+
   .p-rating-icon {
     color: #7065f0;
   }

@@ -6,6 +6,7 @@ import { BookCardComponent } from './components/book-card/book-card.component';
 import { CommonModule } from '@angular/common'; // Para diretivas como *ngFor e *ngIf
 import { Book } from './models/book.model';
 import { BookService } from './services/book.service';
+import { BookCardSimpleComponent } from './components/book-card-simple/book-card-simple.component';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ import { BookService } from './services/book.service';
     NavBarComponent,
     SearchBarComponent,
     BookCardComponent,
+    BookCardSimpleComponent
   ], // Importe os componentes standalone
 })
 export class AppComponent implements OnInit {

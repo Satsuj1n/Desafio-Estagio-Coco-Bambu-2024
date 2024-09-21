@@ -2,7 +2,7 @@
 <app-search-bar (search)="onSearch($event)"></app-search-bar>
 
 <div *ngIf="books.length > 0" class="book-list">
-  <app-book-card *ngFor="let book of books" [book]="book"></app-book-card>
+  <app-book-card-simple *ngFor="let book of books" [book]="book"></app-book-card-simple>
 </div>
 
 <div class="pagination" *ngIf="totalItems > booksPerPage">
