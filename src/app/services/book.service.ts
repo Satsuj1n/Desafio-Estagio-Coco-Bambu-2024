@@ -70,8 +70,12 @@ export class BookService {
   }
 
   // Funções de favoritos
-  getFavoriteBooks(): Book[] {
-    return JSON.parse(localStorage.getItem('favorites') || '[]');
+  getFavoriteBooks(): any[] {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const favorites = localStorage.getItem('favorites');
+      return favorites ? JSON.parse(favorites) : [];
+    }
+    return [];
   }
 
   addToFavorites(book: Book) {
@@ -83,14 +87,13 @@ export class BookService {
     }
   }
 
-  isFavorite(book: Book): boolean {
-    return this.getFavoriteBooks().some((fav) => fav.id === book.id);
-  }
-
-  removeFavorite(book: Book) {
-    const favorites = this.getFavoriteBooks().filter(
-      (b: Book) => b.id !== book.id
-    );
-    localStorage.setItem(this.favoritesKey, JSON.stringify(favorites));
+  removeFromFavorites(bookId: string) {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      const updatedFavorites = favorites.filter(
+        (fav: any) => fav.id !== bookId
+      );
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    }
   }
 }
