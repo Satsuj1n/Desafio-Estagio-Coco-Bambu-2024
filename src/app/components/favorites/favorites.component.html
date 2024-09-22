@@ -1,8 +1,10 @@
+<h4><a href="/">☚ Voltar</a></h4>
 <h1>Livros Favoritos</h1>
 <div *ngIf="favoriteBooks.length > 0" class="book-list-fav">
   <app-book-card
     *ngFor="let book of favoriteBooks"
     [book]="book"
+    (favoriteRemoved)="onFavoriteRemoved(book)"
   ></app-book-card>
 </div>
 <div *ngIf="favoriteBooks.length === 0">

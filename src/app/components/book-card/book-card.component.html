@@ -1,23 +1,29 @@
-<div class="book-card">
-  <img [src]="book.volumeInfo.imageLinks.thumbnail" alt="Capa do livro" />
-  <h2>{{ book.volumeInfo.title }}</h2>
-  <p-rating [(ngModel)]="value"></p-rating>
-  <p>{{ book.volumeInfo.authors.join(", ") }}</p>
-  <p>
-    {{
-      book.volumeInfo.description.length > 200
-        ? book.volumeInfo.description.substring(0, 200) + "..."
-        : book.volumeInfo.description
-    }}
-  </p>
-  <div class="button-container">
-    <button class="left-button" (click)="addNote()" alt="Anotações">
-      ✍🏻
-      <span class="tooltip-text">Adicionar uma Anotação</span>
-    </button>
-    <button class="middle-button" (click)="addTag()" alt="Tags">
-      🏷️
-      <span class="tooltip-text">Adicionar uma Tag</span>
-    </button>
+<div class="book-card1">
+  <a class="remove-btn" (click)="removeFromFavorites()">
+    ❌
+    <span class="tooltip-text">Remover dos Favoritos</span>
+  </a>
+  <div class="book-card">
+    <img [src]="book.volumeInfo.imageLinks.thumbnail" alt="Capa do livro" />
+    <h2>{{ book.volumeInfo.title }}</h2>
+    <p-rating [(ngModel)]="value"></p-rating>
+    <p>{{ book.volumeInfo.authors.join(", ") }}</p>
+    <p>
+      {{
+        book.volumeInfo.description.length > 200
+          ? book.volumeInfo.description.substring(0, 200) + "..."
+          : book.volumeInfo.description
+      }}
+    </p>
+    <div class="button-container">
+      <button class="left-button" (click)="addNote()" alt="Anotações">
+        ✍🏻
+        <span class="tooltip-text">Adicionar uma Anotação</span>
+      </button>
+      <button class="middle-button" (click)="addTag()" alt="Tags">
+        🏷️
+        <span class="tooltip-text">Adicionar uma Tag</span>
+      </button>
+    </div>
   </div>
 </div>

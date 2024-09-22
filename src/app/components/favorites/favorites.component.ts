@@ -25,4 +25,10 @@ export class FavoritesComponent implements OnInit {
   loadFavoriteBooks(): void {
     this.favoriteBooks = this.bookService.getFavoriteBooks();
   }
+
+  onFavoriteRemoved(book: Book) {
+    this.favoriteBooks = this.favoriteBooks.filter(
+      (favorite) => favorite.id !== book.id
+    );
+  }
 }

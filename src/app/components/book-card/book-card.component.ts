@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Book } from '../../models/book.model';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
+import { BookService } from '../../services/book.service';
 
 @Component({
   selector: 'app-book-card',
@@ -12,10 +13,14 @@ import { FormsModule } from '@angular/forms';
 })
 export class BookCardComponent {
   @Input() book!: Book;
+  @Output() favoriteRemoved = new EventEmitter<void>();
   value: number = 0;
 
-  addToFavorites() {
-    console.log(`Adicionado aos favoritos: ${this.book.volumeInfo.title}`);
+  constructor(private bookService: BookService) {}
+
+  removeFromFavorites() {
+    this.bookService.removeFromFavorites(this.book.id);
+    this.favoriteRemoved.emit();
   }
 
   addNote() {

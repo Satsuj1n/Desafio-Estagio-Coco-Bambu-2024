@@ -1,7 +1,4 @@
 .book-card {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 20px;
   text-align: center;
   display: flex;
@@ -94,5 +91,67 @@ button:hover {
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #333 transparent transparent transparent;
+  border-color: #100A55 transparent transparent transparent;
+}
+
+.book-card1 {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.remove-btn {
+  margin-top: 10px;
+  margin-left: 15px;
+  font-size: 16px;
+  color: red;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  position: relative;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: darkred;
+  }
+
+  &:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.remove-btn .tooltip-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: #b11717;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 4px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: -10px;
+  left: 48%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 12px;
+  white-space: pre-wrap;
+}
+
+.remove-btn .tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #b11717 transparent transparent transparent;
 }

@@ -94,6 +94,7 @@ export class BookService {
         (fav: any) => fav.id !== bookId
       );
       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+      this.favoriteCountChanged.next();
     }
   }
 }
