@@ -115,50 +115,11 @@ button:hover {
   top: 10px;
   right: 10px;
   font-size: 16px;
-  color: red;
   background: none;
   border: none;
   cursor: pointer;
   z-index: 10;
   transition: color 0.3s ease;
-
-  &:hover {
-    color: darkred;
-  }
-
-  &:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
-  }
-}
-
-.remove-btn .tooltip-text {
-  visibility: hidden;
-  width: 120px;
-  background-color: #b11717;
-  color: #fff;
-  text-align: center;
-  border-radius: 5px;
-  padding: 3px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 40px;
-  margin-left: auto;
-  opacity: 0;
-  transition: opacity 0.3s;
-  font-size: 12px;
-  white-space: pre-wrap;
-}
-
-.remove-btn .tooltip-text::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #b11717 transparent transparent transparent;
 }
 
 .tag-popup {
@@ -343,23 +304,27 @@ button:hover {
         align-items: center;
         position: absolute;
         top: 5px;
-        right: 5px;
+        right: 10px;
         z-index: 10;
         transition: color 0.3s ease;
 
         &:hover {
           color: darkblue;
         }
+        &:hover .tooltip-text-node {
+          visibility: visible;
+          opacity: 1;
+        }
 
         @media (max-width: 768px) {
-          margin-right: 0px;
+          margin-right: -2px;
         }
       }
       .edit-note {
         background: none;
         border: none;
-        font-size: 14px;
-        color: black;
+        font-size: 16px;
+        color: #5847c7;
         cursor: pointer;
         padding: 5px;
         margin: 0;
@@ -376,6 +341,10 @@ button:hover {
 
         &:hover {
           color: darkblue;
+        }
+        &:hover .tooltip-text-node {
+          visibility: visible;
+          opacity: 1;
         }
 
         @media (max-width: 768px) {
@@ -443,6 +412,45 @@ button:hover {
     }
   }
 }
+
+.tooltip-text-note {
+  visibility: hidden;
+  opacity: 0;
+  background-color: darkblue;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  top: 125%; /* Agora posiciona o tooltip abaixo do botão */
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease;
+  width: max-content;
+  max-width: 200px;
+  font-size: 10px;
+  white-space: nowrap;
+  pointer-events: none; /* Previne clique no tooltip */
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 100%; /* Posiciona a seta na parte de cima do tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent darkblue transparent;
+  }
+}
+
+.edit-note:hover .tooltip-text-note,
+.remove-note:hover .tooltip-text-note {
+  visibility: visible;
+  opacity: 1;
+}
+
 
 /* Fundo escurecido */
 .overlay {

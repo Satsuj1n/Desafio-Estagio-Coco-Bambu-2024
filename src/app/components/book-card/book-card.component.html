@@ -1,5 +1,5 @@
 <div class="book-card1">
-  <a class="remove-btn" (click)="removeFromFavorites()"> ❌ </a>
+  <a class="remove-btn" (click)="removeFromFavorites()"> ✖️ </a>
   <div class="book-card">
     <img [src]="book.volumeInfo.imageLinks.thumbnail" alt="Capa do livro" />
     <h2>{{ book.volumeInfo.title }}</h2>
@@ -66,8 +66,14 @@
         <p>{{ note.description }}</p>
         <small *ngIf="note.page">Página: {{ note.page }}</small>
 
-        <button class="remove-note" (click)="removeNote(i)">❌</button>
-        <button class="edit-note" (click)="editNote(i)">✏️</button>
+        <button class="remove-note" (click)="removeNote(i)" alt="Remover">
+          ✖️
+          <span class="tooltip-text-note">Remover</span>
+        </button>
+        <button class="edit-note" (click)="editNote(i)" alt="Editar">
+          ✎
+          <span class="tooltip-text-note">Editar</span>
+        </button>
       </div>
     </div>
 
