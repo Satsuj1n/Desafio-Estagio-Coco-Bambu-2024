@@ -49,6 +49,7 @@ export class BookCardComponent implements OnInit {
       this.tags.push(trimmedTag);
       this.saveTagsToLocalStorage();
       this.newTag = '';
+      this.closeTagPopup();
     } else {
       console.log('Tag já existe ou é inválida.');
       this.newTag = '';
