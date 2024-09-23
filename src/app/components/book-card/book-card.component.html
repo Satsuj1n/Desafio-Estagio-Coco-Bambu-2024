@@ -6,7 +6,10 @@
   <div class="book-card">
     <img [src]="book.volumeInfo.imageLinks.thumbnail" alt="Capa do livro" />
     <h2>{{ book.volumeInfo.title }}</h2>
-    <p-rating [(ngModel)]="value"></p-rating>
+    <p-rating
+      [(ngModel)]="value"
+      (onRate)="onRatingChange($event.value)"
+    ></p-rating>
     <p>{{ book.volumeInfo.authors.join(", ") }}</p>
     <p>
       {{
@@ -15,15 +18,34 @@
           : book.volumeInfo.description
       }}
     </p>
+
+    <!-- Exibe tags -->
+    <div *ngIf="tags.length > 0" class="tags-container">
+      <span *ngFor="let tag of tags; let i = index" class="tag">
+        #{{ tag }}
+        <a (click)="removeTag(i)" class="a-remove"><p>✕</p></a>
+      </span>
+    </div>
+
     <div class="button-container">
       <button class="left-button" (click)="addNote()" alt="Anotações">
         ✍🏻
         <span class="tooltip-text">Adicionar uma Anotação</span>
       </button>
-      <button class="middle-button" (click)="addTag()" alt="Tags">
+      <button class="middle-button" (click)="openTagPopup()" alt="Tags">
         🏷️
         <span class="tooltip-text">Adicionar uma Tag</span>
       </button>
+    </div>
+  </div>
+
+  <!-- Popup para adicionar tag -->
+  <div *ngIf="isTagPopupVisible" class="tag-popup">
+    <div class="popup-header">Adicione uma #Tag</div>
+    <input type="text" [(ngModel)]="newTag" placeholder="Adicione sua nova tag aqui" />
+    <div class="popup-buttons">
+      <button class="cancel-button" (click)="closeTagPopup()">Fechar</button>
+      <button class="confirm-button" (click)="addTag()">Adicionar</button>
     </div>
   </div>
 </div>
