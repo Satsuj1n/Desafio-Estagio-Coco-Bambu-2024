@@ -17,10 +17,24 @@ export class BookCardComponent implements OnInit {
   @Output() favoriteRemoved = new EventEmitter<void>();
   value: number = 0;
   tags: string[] = [];
+  notes: { title: string, description: string, page?: number }[] = [];
   isTagPopupVisible: boolean = false;
+  isNotePopupVisible: boolean = false;
   newTag: string = '';
+  newNoteTitle: string = '';
+  newNoteDescription: string = '';
+  newNotePage?: number;
 
   constructor(private bookService: BookService) {}
+
+  ngOnInit() {
+    const storedNotes = localStorage.getItem(`${this.book.id}-notes`);
+    this.notes = storedNotes ? JSON.parse(storedNotes) : [];
+    const storedRates = localStorage.getItem(`${this.book.id}-rating`);
+    this.value = storedRates ? JSON.parse(storedRates) : 0;
+    const storedTags = localStorage.getItem(`tags_${this.book.id}`);
+    this.tags = storedTags ? JSON.parse(storedTags) : [];
+  }
 
   openTagPopup() {
     this.isTagPopupVisible = true;
@@ -57,13 +71,6 @@ export class BookCardComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    const storedRates = localStorage.getItem(`${this.book.id}-rating`);
-    this.value = storedRates ? JSON.parse(storedRates) : 0;
-    const storedTags = localStorage.getItem(`tags_${this.book.id}`);
-    this.tags = storedTags ? JSON.parse(storedTags) : [];
-  }
-
   onRatingChange(newRating: number) {
     this.value = newRating;
     this.saveRatingToLocalStorage();
@@ -93,6 +100,40 @@ export class BookCardComponent implements OnInit {
   }
 
   addNote() {
-    console.log(`Nota adicionada: ${this.value}`);
+    this.isNotePopupVisible = true;
+  }
+
+  closeNotePopup() {
+    this.isNotePopupVisible = false;
+  }
+
+  addNoteToBook() {
+    if (this.newNoteTitle && this.newNoteDescription) {
+      this.notes.push({
+        title: this.newNoteTitle,
+        description: this.newNoteDescription,
+        page: this.newNotePage,
+      });
+      this.saveNotes();
+      this.newNoteTitle = '';
+      this.newNoteDescription = '';
+      this.newNotePage = undefined;
+    }
+  }
+
+  removeNote(index: number) {
+    this.notes.splice(index, 1);
+    this.saveNotes();
+  }
+
+  saveNotes() {
+    localStorage.setItem(`${this.book.id}-notes`, JSON.stringify(this.notes));
+  }
+
+  loadNotes() {
+    const savedNotes = localStorage.getItem(`${this.book.id}-notes`);
+    if (savedNotes) {
+      this.notes = JSON.parse(savedNotes);
+    }
   }
 }
