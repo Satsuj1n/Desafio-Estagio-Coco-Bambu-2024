@@ -56,3 +56,28 @@ a {
   color: #7065f0;
   text-decoration: none;
 }
+
+.div-final {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  white-space: nowrap;
+}
+
+p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  max-width: 32ch;
+  word-wrap: break-word;
+}
+
+u {
+  flex-direction: column;
+  word-wrap: normal;
+  white-space: nowrap;
+}

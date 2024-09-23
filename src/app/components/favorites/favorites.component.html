@@ -7,6 +7,12 @@
     (favoriteRemoved)="onFavoriteRemoved(book)"
   ></app-book-card>
 </div>
-<div *ngIf="favoriteBooks.length === 0">
-  <p>Nenhum favorito adicionado.</p>
+<div *ngIf="favoriteBooks.length === 0" class="div-final">
+  <a href="/"
+    ><p>
+      Você não tem nenhum favorito adicionado ainda,
+      <u>clique&#32;aqui&#32;</u>&#32;
+    </p>
+    <p>para voltar e adicionar livros</p>
+  </a>
 </div>

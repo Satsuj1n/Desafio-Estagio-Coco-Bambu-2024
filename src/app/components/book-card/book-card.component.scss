@@ -19,6 +19,10 @@
   font-weight: 600;
   color: #080929;
   margin: 10px 0;
+  line-height: 1.4em;
+  max-height: 2.8em;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .book-card p {
@@ -67,7 +71,7 @@ button:hover {
 .tooltip-text {
   visibility: hidden;
   width: 120px;
-  background-color: #100A55;
+  background-color: #100a55;
   color: #fff;
   text-align: center;
   border-radius: 5px;
@@ -91,7 +95,7 @@ button:hover {
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #100A55 transparent transparent transparent;
+  border-color: #100a55 transparent transparent transparent;
 }
 
 .book-card1 {
@@ -106,7 +110,7 @@ button:hover {
 
 .remove-btn {
   margin-top: 10px;
-  margin-left: 15px;
+  margin-left: 10px;
   font-size: 16px;
   color: red;
   background: none;
