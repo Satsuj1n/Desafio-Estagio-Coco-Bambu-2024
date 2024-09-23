@@ -297,6 +297,7 @@ button:hover {
     margin-bottom: 20px;
 
     .note {
+      position: relative;
       background-color: white;
       border: 1px solid #ddd;
       padding: 10px;
@@ -305,6 +306,12 @@ button:hover {
       position: relative;
       word-break: break-word;
       overflow: hidden;
+
+      buttom {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+      }
 
       h3 {
         font-size: 1.2rem;
@@ -322,22 +329,57 @@ button:hover {
       }
 
       .remove-note {
-        position: absolute;
-        top: 1%;
-        right: 0;
-        margin-right: -70px;
         background: none;
         border: none;
-        font-size: 16px;
-        color: red;
+        font-size: 14px;
+        color: black;
         cursor: pointer;
+        padding: 5px;
+        margin: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        z-index: 10;
+        transition: color 0.3s ease;
 
         &:hover {
-          color: darkred;
+          color: darkblue;
         }
 
         @media (max-width: 768px) {
-          margin-right: -50px;
+          margin-right: 0px;
+        }
+      }
+      .edit-note {
+        background: none;
+        border: none;
+        font-size: 14px;
+        color: black;
+        cursor: pointer;
+        padding: 5px;
+        margin: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 5px;
+        right: 45px;
+        z-index: 10;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: darkblue;
+        }
+
+        @media (max-width: 768px) {
+          margin-right: -10px;
         }
       }
     }

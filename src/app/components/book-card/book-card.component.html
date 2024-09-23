@@ -27,7 +27,7 @@
     <div class="button-container">
       <button class="left-button" (click)="addNotePopup()" alt="Anotações">
         Anotações
-        <span class="tooltip-text">Adicionar ou ver Anotações</span>
+        <span class="tooltip-text">Adicionar,editar ou ver Anotações</span>
       </button>
       <button class="middle-button" (click)="openTagPopup()" alt="Tags">
         Tags
@@ -56,17 +56,21 @@
   <div
     *ngIf="isNotePopupVisible"
     class="note-popup"
-    [ngStyle]="{ bottom: notes.length === 0 ? 'auto' : '100px' }"
+    [ngStyle]="{ bottom: notes.length <= 2 ? 'auto' : '100px' }"
   >
     <div class="popup-header">Anotações</div>
+
     <div class="existing-notes" *ngIf="notes.length > 0">
       <div *ngFor="let note of notes; let i = index" class="note">
         <h3>{{ note.title }}</h3>
         <p>{{ note.description }}</p>
         <small *ngIf="note.page">Página: {{ note.page }}</small>
+
         <button class="remove-note" (click)="removeNote(i)">❌</button>
+        <button class="edit-note" (click)="editNote(i)">✏️</button>
       </div>
     </div>
+
     <div class="add-note-section">
       <input type="text" [(ngModel)]="newNoteTitle" placeholder="Título" />
       <textarea
@@ -79,9 +83,10 @@
         placeholder="Página (Opcional)"
       />
       <button class="confirm-button" (click)="addNoteToBook()">
-        Adicionar Nota
+        {{ isEditingNote ? "Salvar Alterações" : "Adicionar Nota" }}
       </button>
     </div>
+
     <div class="popup-buttons">
       <button class="cancel-button" (click)="closeNotePopup()">Fechar</button>
     </div>

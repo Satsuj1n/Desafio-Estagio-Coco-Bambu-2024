@@ -17,13 +17,15 @@ export class BookCardComponent implements OnInit {
   @Output() favoriteRemoved = new EventEmitter<void>();
   value: number = 0;
   tags: string[] = [];
-  notes: { title: string, description: string, page?: number }[] = [];
+  notes: { title: string; description: string; page?: number }[] = [];
   isTagPopupVisible: boolean = false;
   isNotePopupVisible: boolean = false;
   newTag: string = '';
   newNoteTitle: string = '';
   newNoteDescription: string = '';
   newNotePage?: number;
+  isEditingNote = false;
+  noteIndexToEdit: number | null = null;
 
   constructor(private bookService: BookService) {}
 
@@ -105,28 +107,61 @@ export class BookCardComponent implements OnInit {
 
   closeNotePopup() {
     this.isNotePopupVisible = false;
+    this.isEditingNote = false;
+    this.newNoteTitle = '';
+    this.newNoteDescription = '';
+    this.newNotePage = undefined;
+  }
+
+  editNote(index: number) {
+    this.isEditingNote = true;
+    this.noteIndexToEdit = index;
+
+    const note = this.notes[index];
+    this.newNoteTitle = note.title;
+    this.newNoteDescription = note.description;
+    this.newNotePage = note.page || undefined;
+
+    this.isNotePopupVisible = true;
+
+    setTimeout(() => {
+      const noteSection = document.querySelector('.add-note-section');
+      if (noteSection) {
+        noteSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   }
 
   addNoteToBook() {
-    if (this.newNoteTitle && this.newNoteDescription) {
-      this.notes.push({
-        title: this.newNoteTitle,
-        description: this.newNoteDescription,
-        page: this.newNotePage,
-      });
-      this.saveNotes();
-      this.newNoteTitle = '';
-      this.newNoteDescription = '';
-      this.newNotePage = undefined;
+    const newNote = {
+      title: this.newNoteTitle,
+      description: this.newNoteDescription,
+      page: this.newNotePage || undefined,
+    };
+
+    if (this.isEditingNote && this.noteIndexToEdit !== null) {
+      this.notes[this.noteIndexToEdit] = newNote;
+      this.isEditingNote = false;
+      this.noteIndexToEdit = null;
+    } else {
+      this.notes.push(newNote);
     }
+
+    this.saveNotesToLocalStorage();
+
+    this.newNoteTitle = '';
+    this.newNoteDescription = '';
+    this.newNotePage = undefined;
+
+    this.isNotePopupVisible = false;
   }
 
   removeNote(index: number) {
     this.notes.splice(index, 1);
-    this.saveNotes();
+    this.saveNotesToLocalStorage();
   }
 
-  saveNotes() {
+  saveNotesToLocalStorage() {
     localStorage.setItem(`${this.book.id}-notes`, JSON.stringify(this.notes));
   }
 
