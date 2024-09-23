@@ -99,7 +99,7 @@ export class BookCardComponent implements OnInit {
     this.favoriteRemoved.emit();
   }
 
-  addNote() {
+  addNotePopup() {
     this.isNotePopupVisible = true;
   }
 
