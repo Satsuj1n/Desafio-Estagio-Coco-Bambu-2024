@@ -39,23 +39,33 @@ export class BookCardComponent implements OnInit {
     localStorage.setItem(`tags_${this.book.id}`, JSON.stringify(this.tags));
   }
 
+  saveRatingToLocalStorage() {
+    localStorage.setItem(`${this.book.id}-rating`, JSON.stringify(this.value));
+  }
+
   addTag() {
-    if (this.newTag.trim()) {
-      this.tags.push(this.newTag.trim());
-      this.newTag = '';
+    const trimmedTag = this.newTag.trim();
+    if (trimmedTag && !this.tags.includes(trimmedTag)) {
+      this.tags.push(trimmedTag);
       this.saveTagsToLocalStorage();
+      this.newTag = '';
+    } else {
+      console.log('Tag já existe ou é inválida.');
+      this.newTag = '';
       this.closeTagPopup();
     }
   }
 
   ngOnInit() {
-    this.loadRating();
+    const storedRates = localStorage.getItem(`${this.book.id}-rating`);
+    this.value = storedRates ? JSON.parse(storedRates) : 0;
     const storedTags = localStorage.getItem(`tags_${this.book.id}`);
     this.tags = storedTags ? JSON.parse(storedTags) : [];
   }
 
   onRatingChange(newRating: number) {
     this.value = newRating;
+    this.saveRatingToLocalStorage();
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
     const updatedFavorites = favorites.map((fav: any) => {
