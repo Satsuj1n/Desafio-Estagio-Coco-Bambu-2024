@@ -15,6 +15,9 @@ import { CommonModule } from '@angular/common';
 export class BookCardComponent implements OnInit {
   @Input() book!: Book;
   @Output() favoriteRemoved = new EventEmitter<void>();
+  @Output() tagsUpdated = new EventEmitter<void>();
+  @Output() notesUpdated = new EventEmitter<void>();
+  @Output() ratingUpdated = new EventEmitter<void>();
   value: number = 0;
   tags: string[] = [];
   notes: { title: string; description: string; page?: number }[] = [];
@@ -49,6 +52,10 @@ export class BookCardComponent implements OnInit {
   removeTag(index: number) {
     this.tags.splice(index, 1);
     this.saveTagsToLocalStorage();
+    this.tagsUpdated.emit();
+  }
+  saveNotesToLocalStorage() {
+    localStorage.setItem(`${this.book.id}-notes`, JSON.stringify(this.notes));
   }
 
   saveTagsToLocalStorage() {
@@ -66,6 +73,7 @@ export class BookCardComponent implements OnInit {
       this.saveTagsToLocalStorage();
       this.newTag = '';
       this.closeTagPopup();
+      this.tagsUpdated.emit();
     } else {
       console.log('Tag já existe ou é inválida.');
       this.newTag = '';
@@ -76,6 +84,7 @@ export class BookCardComponent implements OnInit {
   onRatingChange(newRating: number) {
     this.value = newRating;
     this.saveRatingToLocalStorage();
+    this.ratingUpdated.emit();
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
     const updatedFavorites = favorites.map((fav: any) => {
@@ -148,21 +157,17 @@ export class BookCardComponent implements OnInit {
     }
 
     this.saveNotesToLocalStorage();
+    this.notesUpdated.emit();
 
     this.newNoteTitle = '';
     this.newNoteDescription = '';
     this.newNotePage = undefined;
-
-    this.isNotePopupVisible = false;
   }
 
   removeNote(index: number) {
     this.notes.splice(index, 1);
     this.saveNotesToLocalStorage();
-  }
-
-  saveNotesToLocalStorage() {
-    localStorage.setItem(`${this.book.id}-notes`, JSON.stringify(this.notes));
+    this.notesUpdated.emit();
   }
 
   loadNotes() {

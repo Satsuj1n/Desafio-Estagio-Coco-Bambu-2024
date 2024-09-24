@@ -9,6 +9,7 @@ import { BookService } from './services/book.service';
 import { BookCardSimpleComponent } from './components/book-card-simple/book-card-simple.component';
 import { Subscription } from 'rxjs';
 
+
 @Component({
   selector: 'app-root',
   standalone: true, // Definido como standalone

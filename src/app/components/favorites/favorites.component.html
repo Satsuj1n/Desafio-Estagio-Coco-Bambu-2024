@@ -1,18 +1,26 @@
 <h4><a href="/">☚ Voltar</a></h4>
 <h1>Livros Favoritos</h1>
-<div *ngIf="favoriteBooks.length > 0" class="book-list-fav">
+
+<!-- Inclusão do componente de filtro -->
+<app-favorites-filter
+  (search)="onSearch($event)"
+  (filterApplied)="onFilterChange($event)"
+></app-favorites-filter>
+
+<div *ngIf="filteredBooks.length > 0" class="book-list-fav">
   <app-book-card
-    *ngFor="let book of favoriteBooks"
+    *ngFor="let book of filteredBooks"
     [book]="book"
     (favoriteRemoved)="onFavoriteRemoved(book)"
+    (tagsUpdated)="onBookUpdated()"
+    (notesUpdated)="onBookUpdated()"
+    (ratingUpdated)="onBookUpdated()"
   ></app-book-card>
 </div>
-<div *ngIf="favoriteBooks.length === 0" class="div-final">
-  <a href="/"
-    ><p>
-      Você não tem nenhum favorito adicionado ainda,
-      <u>clique&#32;aqui&#32;</u>&#32;
-    </p>
+
+<div *ngIf="filteredBooks.length === 0" class="div-final">
+  <a href="/">
+    <p class="p1">Você não tem nenhum favorito adicionado ainda, <u>clique aqui</u></p>
     <p>para voltar e adicionar livros</p>
   </a>
 </div>

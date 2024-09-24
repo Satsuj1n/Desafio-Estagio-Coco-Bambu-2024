@@ -66,12 +66,13 @@ a {
   white-space: nowrap;
 }
 
-p {
+.p1 {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   margin: auto;
+  margin-top: 50px;
   max-width: 32ch;
   word-wrap: break-word;
 }
@@ -80,4 +81,11 @@ u {
   flex-direction: column;
   word-wrap: normal;
   white-space: nowrap;
+}
+
+app-favorites-filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }

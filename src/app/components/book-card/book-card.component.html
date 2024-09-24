@@ -5,6 +5,7 @@
     <h2>{{ book.volumeInfo.title }}</h2>
     <p-rating
       [(ngModel)]="value"
+      [cancel]="false"
       (onRate)="onRatingChange($event.value)"
     ></p-rating>
     <p>{{ book.volumeInfo.authors.join(", ") }}</p>

@@ -1,0 +1,100 @@
+.search-bar {
+  display: flex;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+
+  input {
+    padding: 11px;
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline-color: #7065f0;
+  }
+
+  button {
+    padding: 11px 20px;
+    background-color: #7065f0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 20px;
+  }
+
+  label {
+    color: #7065f0;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  .filter-dropdown {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    gap: 5px;
+    outline-color: #7065f0;
+    border: #7065f0;
+
+    select {
+      color: darkblue;
+      font-weight: bold;
+      border-radius: 5px;
+      border: 1px solid #7065f0;
+      padding: 8px;
+      background-color: white;
+
+      &:focus {
+        outline-color: #7065f0;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+
+    input {
+      width: 100%;
+      margin-right: 0;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+
+    .filter-dropdown {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
+  @media (max-width: 480px) {
+    gap: 5px;
+    padding: 5px;
+
+    input {
+      padding: 10px;
+    }
+
+    button {
+      padding: 10px;
+      width: 100%;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    .filter-dropdown {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    select {
+      padding: 8px;
+      width: 100%;
+    }
+  }
+}
