@@ -9,7 +9,6 @@ import { BookService } from './services/book.service';
 import { BookCardSimpleComponent } from './components/book-card-simple/book-card-simple.component';
 import { Subscription } from 'rxjs';
 
-
 @Component({
   selector: 'app-root',
   standalone: true, // Definido como standalone
@@ -34,6 +33,7 @@ export class AppComponent implements OnInit {
   maxVisiblePages: number = 3; // Número máximo de páginas visíveis
   favoriteCount: number = 0;
   isHomeRoute: boolean = false;
+  isLoading: boolean = true;
 
   Math = Math; // Expondo o objeto Math para o template
 
@@ -76,6 +76,7 @@ export class AppComponent implements OnInit {
   }
 
   loadBooks() {
+    this.isLoading = true;
     const startIndex = (this.currentPage - 1) * this.booksPerPage;
     this.bookService
       .searchBooks(this.searchQuery, startIndex)
@@ -83,7 +84,8 @@ export class AppComponent implements OnInit {
         this.books = response.books;
         this.totalItems = response.totalItems;
         this.updateVisiblePages();
-        this.scrollToTop(); // Rolagem para o topo após carregar os livros
+        this.scrollToTop();
+        this.isLoading = false;
       });
   }
 

@@ -14,7 +14,7 @@ export class FavoritesFilterComponent {
   @Output() filterApplied = new EventEmitter<string>();
 
   query: string = '';
-  selectedFilter: string = 'rating'; 
+  selectedFilter: string = 'bestRated';
 
   onSearch() {
     this.search.emit(this.query);

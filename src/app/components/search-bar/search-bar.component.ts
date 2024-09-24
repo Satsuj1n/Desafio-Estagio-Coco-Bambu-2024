@@ -22,10 +22,10 @@ import {
 })
 export class SearchBarComponent implements OnInit, OnDestroy {
   query: string = '';
-  @Output() search = new EventEmitter<string>(); // O tipo é string
+  @Output() search = new EventEmitter<string>(); 
 
   onSearch() {
-    this.search.emit(this.query); // Emitindo a string digitada
+    this.search.emit(this.query);
   }
   private searchSubject = new Subject<string>();
   private subscription!: Subscription;

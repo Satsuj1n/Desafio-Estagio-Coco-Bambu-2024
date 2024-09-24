@@ -3,7 +3,7 @@
     type="text"
     [(ngModel)]="query"
     (input)="onInputChange()"
-    placeholder="Busque por tags ou notas"
+    placeholder="Busque por Tags, Anotações ou Título"
   />
   <button (click)="onSearch()">Buscar</button>
 
@@ -12,7 +12,7 @@
     <select id="filter" [(ngModel)]="selectedFilter" (change)="applyFilter()">
       <option value="bestRated">Melhor Avaliado</option>
       <option value="mostTags">Mais Tags</option>
-      <option value="mostNotes">Mais Notas</option>
+      <option value="mostNotes">Mais Anotações</option>
     </select>
   </div>
 </div>

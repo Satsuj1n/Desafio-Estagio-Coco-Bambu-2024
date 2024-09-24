@@ -18,7 +18,7 @@ export class NavBarComponent {
   ngOnInit() {
     this.updateFavoriteCount();
 
-    // Escuta a mudança nos favoritos e atualiza o contador
+
     this.bookService.favoriteCountChanged.subscribe(() => {
       this.updateFavoriteCount();
     });
@@ -26,13 +26,13 @@ export class NavBarComponent {
 
   updateFavoriteCount() {
     if (typeof window !== 'undefined') {
-      // Verifica se o window está disponível
+
       const favoriteBooks = JSON.parse(
         localStorage.getItem('favorites') || '[]'
       );
       this.favoriteCount = favoriteBooks.length;
     } else {
-      this.favoriteCount = 0; // Caso window ou localStorage não estejam disponíveis
+      this.favoriteCount = 0; 
     }
   }
 

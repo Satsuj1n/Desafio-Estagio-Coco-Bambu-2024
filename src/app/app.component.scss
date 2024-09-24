@@ -39,3 +39,41 @@
     }
   }
 }
+
+.no-books-found {
+  display: flex;
+  color: #7065f0;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  margin-top: 50px;
+  max-width: 32ch;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  hyphens: auto;
+
+  @media (max-width: 600px) {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+}
+
+.loading-message {
+  display: flex;
+  color: #7065f0;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 50%;
+  height: 50%;
+  margin: auto;
+  position: absolute;
+  inset: 0;
+
+  @media (max-width: 600px) {
+    width: 80%;
+    padding: 0 10px;
+  }
+}

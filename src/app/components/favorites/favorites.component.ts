@@ -24,33 +24,39 @@ export class FavoritesComponent implements OnInit {
   favoriteBooks: Book[] = [];
   filteredBooks: Book[] = [];
   searchQuery: string = '';
-  selectedFilter: string = 'bestRated'; // Definir o filtro padrão como 'Melhor Avaliado'
+  selectedFilter: string = 'bestRated';
+  isLoading: boolean = true;
 
   constructor(private bookService: BookService) {}
 
   ngOnInit() {
     this.loadFavoriteBooks();
-    this.applyFilter(); // Aplicar o filtro padrão ao carregar a página
+    this.applyFilter();
   }
 
   loadFavoriteBooks(): void {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      const savedFavorites = localStorage.getItem('favorites');
-      if (savedFavorites) {
-        this.favoriteBooks = JSON.parse(savedFavorites);
-        this.favoriteBooks.forEach((book) => {
-          const storedTags = localStorage.getItem(`tags_${book.id}`);
-          const storedNotes = localStorage.getItem(`${book.id}-notes`);
-          const storedRating = localStorage.getItem(`${book.id}-rating`);
+    this.isLoading = true;
+    setTimeout(() => {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        const savedFavorites = localStorage.getItem('favorites');
+        if (savedFavorites) {
+          this.favoriteBooks = JSON.parse(savedFavorites);
+          this.favoriteBooks.forEach((book) => {
+            const storedTags = localStorage.getItem(`tags_${book.id}`);
+            const storedNotes = localStorage.getItem(`${book.id}-notes`);
+            const storedRating = localStorage.getItem(`${book.id}-rating`);
 
-          book.tags = storedTags ? JSON.parse(storedTags) : [];
-          book.notes = storedNotes ? JSON.parse(storedNotes) : [];
-          book.rating = storedRating ? JSON.parse(storedRating) : 0;
-        });
+            book.tags = storedTags ? JSON.parse(storedTags) : [];
+            book.notes = storedNotes ? JSON.parse(storedNotes) : [];
+            book.rating = storedRating ? JSON.parse(storedRating) : 0;
+          });
 
-        this.filteredBooks = [...this.favoriteBooks];
+          this.filteredBooks = [...this.favoriteBooks];
+        }
       }
-    }
+      this.isLoading = false;
+      this.applyFilter();
+    }, 100);
   }
 
   onFavoriteRemoved(book: Book) {
@@ -66,50 +72,43 @@ export class FavoritesComponent implements OnInit {
   applyFilter() {
     let books = [...this.favoriteBooks];
 
-    console.log('Aplicando filtro...');
-
-    // Filtro por tags ou título da nota
     if (this.searchQuery.trim()) {
-      console.log(`Realizando busca com query: ${this.searchQuery}`);
       books = books.filter((book) => {
         const hasMatchingTag = book.tags?.some((tag) =>
           tag.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
+
         const hasMatchingNote = book.notes?.some((note) =>
           note.title.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
-        console.log(
-          `Livro: ${book.volumeInfo.title}, Tem tag correspondente: ${hasMatchingTag}, Tem nota correspondente: ${hasMatchingNote}`
-        );
-        return hasMatchingTag || hasMatchingNote;
+
+        const hasMatchingTitle = book.volumeInfo.title
+          .toLowerCase()
+          .includes(this.searchQuery.toLowerCase());
+
+        return hasMatchingTag || hasMatchingNote || hasMatchingTitle;
       });
     }
 
-    // Filtro adicional pelo dropdown
     if (this.selectedFilter) {
-      console.log(`Aplicando filtro adicional: ${this.selectedFilter}`);
       if (this.selectedFilter === 'mostTags') {
         books = books.sort(
           (a, b) => (b.tags?.length || 0) - (a.tags?.length || 0)
         );
-        console.log('Ordenado por mais tags:', books);
       } else if (this.selectedFilter === 'bestRated') {
         books = books.sort((a, b) => (b.rating || 0) - (a.rating || 0));
-        console.log('Ordenado por melhor avaliação:', books);
       } else if (this.selectedFilter === 'mostNotes') {
         books = books.sort(
           (a, b) => (b.notes?.length || 0) - (a.notes?.length || 0)
         );
-        console.log('Ordenado por mais notas:', books);
       }
     }
 
     this.filteredBooks = books;
-    this.updateDOM(); // Nova função para refletir as mudanças no DOM
+    this.updateDOM();
   }
 
   updateDOM() {
-    // Aqui garantimos que a lista de livros seja renderizada corretamente no DOM
     if (this.filteredBooks.length === 0) {
       console.log('Nenhum livro encontrado.');
     } else {
@@ -128,8 +127,7 @@ export class FavoritesComponent implements OnInit {
   }
 
   onBookUpdated() {
-    console.log('Livro atualizado, aplicando filtros novamente...');
-    this.loadFavoriteBooks(); // Recarregar os livros e aplicar o filtro ao invés de apenas aplicar o filtro
+    this.loadFavoriteBooks();
     this.applyFilter();
   }
 }

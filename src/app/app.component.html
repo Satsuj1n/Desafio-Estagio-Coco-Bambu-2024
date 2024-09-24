@@ -1,13 +1,15 @@
 <app-navbar [favoriteCount]="favoriteCount"></app-navbar>
 
-<!-- Renderiza o conteúdo específico da rota -->
 <router-outlet></router-outlet>
 
-<!-- Exibe a barra de busca e os livros na rota inicial -->
 <div *ngIf="isHomeRoute">
   <app-search-bar (search)="onSearch($event)"></app-search-bar>
 
-  <div *ngIf="books.length > 0" class="book-list">
+  <div *ngIf="isLoading" class="loading-message">
+    <img src="/loading.svg" alt="Carregando..." />
+  </div>
+
+  <div *ngIf="!isLoading && books.length > 0" class="book-list">
     <app-book-card-simple
       *ngFor="let book of books"
       [book]="book"
@@ -15,7 +17,11 @@
     ></app-book-card-simple>
   </div>
 
-  <div class="pagination" *ngIf="totalItems > booksPerPage">
+  <div *ngIf="!isLoading && books.length === 0" class="no-books-found">
+    Não foram encontrados livros para sua pesquisa.
+  </div>
+
+  <div class="pagination" *ngIf="!isLoading && totalItems > booksPerPage">
     <button (click)="prevPage()" [disabled]="currentPage === 1">←</button>
     <button
       *ngFor="let page of visiblePages"

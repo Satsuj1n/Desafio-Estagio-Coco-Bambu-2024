@@ -75,12 +75,14 @@ a {
   margin-top: 50px;
   max-width: 32ch;
   word-wrap: break-word;
-}
+  overflow-wrap: break-word;
+  white-space: normal;
+  hyphens: auto;
 
-u {
-  flex-direction: column;
-  word-wrap: normal;
-  white-space: nowrap;
+  @media (max-width: 600px) {
+    max-width: 100%;
+    padding: 0 10px;
+  }
 }
 
 app-favorites-filter {
@@ -88,4 +90,22 @@ app-favorites-filter {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+}
+
+.loading {
+  display: flex;
+  color: #7065f0;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 50%;
+  height: 50%;
+  margin: auto;
+  position: absolute;
+  inset: 0;
+
+  @media (max-width: 600px) {
+    width: 80%;
+    padding: 0 10px;
+  }
 }

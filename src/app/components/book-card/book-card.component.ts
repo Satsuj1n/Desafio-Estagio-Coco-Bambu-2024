@@ -39,6 +39,28 @@ export class BookCardComponent implements OnInit {
     this.value = storedRates ? JSON.parse(storedRates) : 0;
     const storedTags = localStorage.getItem(`tags_${this.book.id}`);
     this.tags = storedTags ? JSON.parse(storedTags) : [];
+
+    const popupOpen = localStorage.getItem('notePopupOpen');
+    const noteIndexToEdit = localStorage.getItem('noteIndexToEdit');
+    const noteBookId = localStorage.getItem('noteBookId');
+
+    if (popupOpen === 'true' && noteBookId === this.book.id) {
+      this.isNotePopupVisible = true;
+
+      if (noteIndexToEdit !== 'null' && noteIndexToEdit !== null) {
+        this.noteIndexToEdit = parseInt(noteIndexToEdit, 10);
+        const note = this.notes[this.noteIndexToEdit];
+        if (note) {
+          this.newNoteTitle = note.title;
+          this.newNoteDescription = note.description;
+          this.newNotePage = note.page || undefined;
+        }
+      }
+
+      localStorage.removeItem('notePopupOpen');
+      localStorage.removeItem('noteIndexToEdit');
+      localStorage.removeItem('noteBookId');
+    }
   }
 
   openTagPopup() {
@@ -162,12 +184,39 @@ export class BookCardComponent implements OnInit {
     this.newNoteTitle = '';
     this.newNoteDescription = '';
     this.newNotePage = undefined;
+
+    this.isNotePopupVisible = true;
+    localStorage.setItem('notePopupOpen', 'true');
+    localStorage.setItem(
+      'noteIndexToEdit',
+      this.noteIndexToEdit !== null ? this.noteIndexToEdit.toString() : 'null'
+    );
+    localStorage.setItem('noteBookId', this.book.id);
   }
 
   removeNote(index: number) {
     this.notes.splice(index, 1);
     this.saveNotesToLocalStorage();
     this.notesUpdated.emit();
+
+    this.isNotePopupVisible = true;
+
+    if (this.noteIndexToEdit === index) {
+      this.isEditingNote = false;
+      this.noteIndexToEdit = null;
+      this.newNoteTitle = '';
+      this.newNoteDescription = '';
+      this.newNotePage = undefined;
+    } else if (this.noteIndexToEdit !== null && this.noteIndexToEdit > index) {
+      this.noteIndexToEdit--;
+    }
+
+    localStorage.setItem('notePopupOpen', 'true');
+    localStorage.setItem(
+      'noteIndexToEdit',
+      this.noteIndexToEdit !== null ? this.noteIndexToEdit.toString() : 'null'
+    );
+    localStorage.setItem('noteBookId', this.book.id);
   }
 
   loadNotes() {
