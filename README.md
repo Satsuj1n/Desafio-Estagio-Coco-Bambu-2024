@@ -1,27 +1,115 @@
-# LojaLivro
+# Projeto Dev Full Stack 2024 - Biblioteca de Livros
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.5.
+Este é um projeto desenvolvido como parte do Desafio Dev Full Stack 2024 para estágio, que tem como objetivo criar uma aplicação para explorar uma coleção de livros, utilizando a API pública do Google Books. A aplicação permite aos usuários buscar livros, favoritar, adicionar notas pessoais, avaliações e tags, além de gerenciar essa lista de favoritos e realizar filtragens.
 
-## Development server
+## Funcionalidades
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Busca de Livros**: Permite buscar livros por título ou autor utilizando a Google Books API.
+- **Informações dos Livros**: Para cada livro, são exibidos título, autor(es), descrição e capa.
+- **Favoritar Livros**: Usuários podem favoritar livros, adicionando-os à lista de favoritos.
+- **Adicionar Notas, Avaliações e Tags**: Para os livros favoritados, o usuário pode adicionar notas pessoais, dar uma avaliação (nota de 1 a 5) e incluir tags personalizadas.
+- **Gerenciamento de Favoritos**: Permite a edição das notas e avaliação dos livros favoritados.
+- **Filtros**: Os favoritos podem ser filtrados por tags e ordenados de acordo com a avaliação ou número de notas e tags.
 
-## Code scaffolding
+## Como Executar o Projeto
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Pré-requisitos
 
-## Build
+- Node.js (versão 14 ou superior)
+- Angular CLI (versão 12 ou superior)
+- Git
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Passos para Execução
 
-## Running unit tests
+1. Clone o repositório:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+git clone https://github.com/usuario/repo-loja-livros.git
+```
 
-## Running end-to-end tests
+2. Navegue até o diretório do projeto:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+cd loja-livros
+```
 
-## Further help
+3. Instale as dependências do projeto:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npm install
+```
+
+4. Execute a aplicação localmente:
+
+```bash
+npm start
+```
+
+A aplicação estará disponível no endereço [http://localhost:4200/](http://localhost:4200/).
+
+## Scripts Disponíveis
+
+- **Iniciar o projeto**: `npm start`
+- **Testar o projeto**: `npm test`
+- **Build de produção**: `npm run build`
+
+## Estrutura do Projeto
+
+- `src/app/components`: Contém os componentes principais da aplicação, como a barra de navegação, cards de livros, barra de busca, etc.
+- `src/app/services`: Contém os serviços responsáveis por buscar dados da API do Google Books e gerenciar os favoritos.
+- `src/app/models`: Modelos para estruturação dos dados dos livros e notas.
+
+## Testes
+
+Os testes foram implementados utilizando Jasmine e Karma. Para rodar os testes, execute:
+
+```bash
+npm test
+```
+
+## Como Contribuir
+
+1. Faça um fork do projeto.
+2. Crie uma branch para sua feature:
+
+```bash
+git checkout -b minha-feature
+```
+
+3. Commit suas mudanças:
+
+```bash
+git commit -m 'Minha nova feature'
+```
+
+4. Faça o push para a branch:
+
+```bash
+git push origin minha-feature
+```
+
+5. Abra um Pull Request no repositório original.
+
+## Critérios de Aceitação
+
+- Busca por título ou autor.
+- Favoritar livros e adicionar notas, avaliações e tags.
+- Filtros aplicados corretamente na lista de favoritos.
+- Testes unitários implementados.
+
+## Tecnologias Utilizadas
+
+- Angular
+- Google Books API
+- RxJS
+- Jasmine & Karma (para testes unitários)
+
+## Melhorias
+
+- Implementado paginação nas buscas de livros.
+- Responsividade em dispositivos móveis.
+- Otimizar a performance ao carregar muitos favoritos.
+
+---
+
+Este projeto foi desenvolvido como parte do Desafio Dev Full Stack 2024 para o processo seletivo da Coco Bambu.
