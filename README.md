@@ -12,7 +12,6 @@ Este é um projeto desenvolvido como parte do Desafio Dev Full Stack 2024 para e
 - **Filtros**: Os favoritos podem ser filtrados por tags e ordenados de acordo com a avaliação ou número de notas e tags.
 - **Buscar nos Favoritos**: Permite buscar livros dentro da lista de favoritos por tag, anotações ou título.
 
-
 ## Como Executar o Projeto
 
 ### Pré-requisitos
@@ -26,13 +25,13 @@ Este é um projeto desenvolvido como parte do Desafio Dev Full Stack 2024 para e
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/usuario/repo-loja-livros.git
+git clone https://github.com/usuario/repo-colecao-livros.git
 ```
 
 2. Navegue até o diretório do projeto:
 
 ```bash
-cd loja-livros
+cd colecao-livros
 ```
 
 3. Instale as dependências do projeto:
@@ -105,12 +104,15 @@ git push origin minha-feature
 - Google Books API
 - RxJS
 - Jasmine & Karma (para testes unitários)
+- PrimeNG
 
 ## Melhorias
 
 - Implementado paginação nas buscas de livros.
 - Responsividade em dispositivos móveis.
 - Otimizar a performance ao carregar muitos favoritos.
+- Implementação de filtros extras que contribuem para a experiência do usuário.
+- Página em SPA (Single Page Application) para uma navegação mais fluida.
 
 ---
 
