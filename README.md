@@ -62,7 +62,7 @@ A aplicação estará disponível no endereço [http://localhost:4200/](http://l
 
 ## Testes
 
-Os testes foram implementados utilizando Jasmine e Karma. Para rodar os testes, execute:
+Os testes foram implementados utilizando Jasmine e Karma. Para rodar os testes(É necessário ter o Google Chrome instalado para que o Karma execute os testes), execute:
 
 ```bash
 npm test
