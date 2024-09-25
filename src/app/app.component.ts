@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router'; // Para navegação
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router'; 
 import { NavBarComponent } from './components/navbar/navbar.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { BookCardComponent } from './components/book-card/book-card.component';
-import { CommonModule } from '@angular/common'; // Para diretivas como *ngFor e *ngIf
+import { CommonModule } from '@angular/common';
 import { Book } from './models/book.model';
 import { BookService } from './services/book.service';
 import { BookCardSimpleComponent } from './components/book-card-simple/book-card-simple.component';
@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  standalone: true, // Definido como standalone
+  standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   imports: [
@@ -21,7 +21,7 @@ import { Subscription } from 'rxjs';
     SearchBarComponent,
     BookCardComponent,
     BookCardSimpleComponent,
-  ], // Importe os componentes standalone
+  ],
 })
 export class AppComponent implements OnInit {
   books: any[] = [];
@@ -30,12 +30,12 @@ export class AppComponent implements OnInit {
   booksPerPage: number = 24;
   searchQuery: string = '';
   visiblePages: number[] = [];
-  maxVisiblePages: number = 3; // Número máximo de páginas visíveis
+  maxVisiblePages: number = 3;
   favoriteCount: number = 0;
   isHomeRoute: boolean = false;
   isLoading: boolean = true;
 
-  Math = Math; // Expondo o objeto Math para o template
+  Math = Math;
 
   private routerSubscription!: Subscription;
 
@@ -60,18 +60,17 @@ export class AppComponent implements OnInit {
 
   onFavoriteAdded() {
     this.updateFavoriteCount();
-    this.bookService.getFavoriteBooks(); // Atualiza a lista de favoritos
+    this.bookService.getFavoriteBooks();
   }
 
   updateFavoriteCount() {
     if (typeof window !== 'undefined') {
-      // Verifica se o window está disponível
       const favoriteBooks = JSON.parse(
         localStorage.getItem('favorites') || '[]'
       );
       this.favoriteCount = favoriteBooks.length;
     } else {
-      this.favoriteCount = 0; // Caso window ou localStorage não estejam disponíveis
+      this.favoriteCount = 0;
     }
   }
 

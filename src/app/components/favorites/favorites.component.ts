@@ -109,11 +109,7 @@ export class FavoritesComponent implements OnInit {
   }
 
   updateDOM() {
-    if (this.filteredBooks.length === 0) {
-      console.log('Nenhum livro encontrado.');
-    } else {
-      console.log(`${this.filteredBooks.length} livros encontrados.`);
-    }
+    // Funcao para atualizar o DOM
   }
 
   onSearch(query: string) {

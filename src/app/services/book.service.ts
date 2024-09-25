@@ -9,7 +9,7 @@ import { BookValidationService } from './book-validation.service';
   providedIn: 'root',
 })
 export class BookService {
-  private apiUrl = 'https://www.googleapis.com/books/v1/volumes'; // URL base para a API de volumes
+  private apiUrl = 'https://www.googleapis.com/books/v1/volumes';
   private favoritesKey = 'favorites';
   favoriteCountChanged = new Subject<void>();
 
@@ -18,30 +18,26 @@ export class BookService {
     private validationService: BookValidationService
   ) {}
 
-  // Função para buscar livros com base na query ou buscar os mais recentes com paginação
   searchBooks(
     query: string = '',
     startIndex: number = 0
   ): Observable<{ books: Book[]; totalItems: number }> {
     let params = new HttpParams();
 
-    // Se a query estiver vazia, usa 'books' como termo genérico
     const searchQuery = query.trim() === '' ? 'books' : query;
 
-    // Configuração de parâmetros
-    params = params.set('q', searchQuery); // Termo de pesquisa
+    params = params.set('q', searchQuery);
     params = params.set(
       'orderBy',
       query.trim() === '' ? 'newest' : 'relevance'
-    ); // Ordenação
-    params = params.set('maxResults', '24'); // Resultados por página
-    params = params.set('startIndex', startIndex.toString()); // Índice inicial para a paginação
+    );
+    params = params.set('maxResults', '24');
+    params = params.set('startIndex', startIndex.toString());
 
     return this.http
       .get<{ items: any[]; totalItems: number }>(`${this.apiUrl}`, { params })
       .pipe(
         map((response) => {
-          // Mapeia os livros e total de itens
           const books = response.items
             ? response.items
                 .map((item) => ({
@@ -69,7 +65,6 @@ export class BookService {
       );
   }
 
-  // Funções de favoritos
   getFavoriteBooks(): any[] {
     if (typeof window !== 'undefined' && window.localStorage) {
       const favorites = localStorage.getItem('favorites');
@@ -83,7 +78,7 @@ export class BookService {
     if (!favorites.find((fav) => fav.id === book.id)) {
       favorites.push(book);
       localStorage.setItem('favorites', JSON.stringify(favorites));
-      this.favoriteCountChanged.next(); // Emite o evento
+      this.favoriteCountChanged.next();
     }
   }
 

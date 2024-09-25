@@ -5,12 +5,13 @@ import { Book } from '../models/book.model';
   providedIn: 'root',
 })
 export class BookValidationService {
+  // Verifica se o livro tem as informações obrigatórias
   hasRequiredInfo(book: Book): boolean {
     return (
-      !!book.volumeInfo.title && // Título é obrigatório
-      !!book.volumeInfo.authors && // Autores são obrigatórios
-      !!book.volumeInfo.description && // Descrição é obrigatória
-      !!book.volumeInfo.imageLinks?.thumbnail // Verifica se a imagem está disponível
+      !!book.volumeInfo.title &&
+      !!book.volumeInfo.authors &&
+      !!book.volumeInfo.description &&
+      !!book.volumeInfo.imageLinks?.thumbnail
     );
   }
 }
