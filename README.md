@@ -25,13 +25,13 @@ Este é um projeto desenvolvido como parte do Desafio Dev Full Stack 2024 para e
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/usuario/repo-colecao-livros.git
+git clone https://github.com/Satsuj1n/Desafio-Estagio-Coco-Bambu-2024
 ```
 
 2. Navegue até o diretório do projeto:
 
 ```bash
-cd colecao-livros
+cd Desafio-Estagio-Coco-Bambu-2024
 ```
 
 3. Instale as dependências do projeto:
