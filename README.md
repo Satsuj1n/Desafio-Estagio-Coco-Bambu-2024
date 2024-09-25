@@ -10,6 +10,8 @@ Este é um projeto desenvolvido como parte do Desafio Dev Full Stack 2024 para e
 - **Adicionar Notas, Avaliações e Tags**: Para os livros favoritados, o usuário pode adicionar notas pessoais, dar uma avaliação (nota de 1 a 5) e incluir tags personalizadas.
 - **Gerenciamento de Favoritos**: Permite a edição das notas e avaliação dos livros favoritados.
 - **Filtros**: Os favoritos podem ser filtrados por tags e ordenados de acordo com a avaliação ou número de notas e tags.
+- **Buscar nos Favoritos**: Permite buscar livros dentro da lista de favoritos por tag, anotações ou título.
+
 
 ## Como Executar o Projeto
 
